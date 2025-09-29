@@ -10,6 +10,11 @@
     </parent>
 
     <artifactId>spring-core</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>spring-core-04</module>
+        <module>spring-core-05</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
