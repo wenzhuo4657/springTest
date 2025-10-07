@@ -6,19 +6,34 @@ import org.springframework.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * 环绕回调
+ * ??????
  */
 public class MyMethodInterceptor implements MethodInterceptor {
 
-    private  final static MyLazyLoader myLazyLoader = new MyLazyLoader();
+    private static final MyLazyLoader MY_LAZY_LOADER = new MyLazyLoader();
 
-    private User user;
+    private volatile boolean initialized;
+
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        if (user==null)user=(User)myLazyLoader.loadObject();
+        ensureInitialized(obj);
         System.out.println("Before method: " + method.getName());
-        proxy.invokeSuper(user, args);
+        Object result = proxy.invokeSuper(obj, args);
         System.out.println("After method: " + method.getName());
-        return null;
+        return result;
+    }
+
+    private void ensureInitialized(Object obj) throws Exception {
+        if (initialized) {
+            return;
+        }
+        synchronized (this) {
+            if (!initialized) {
+                User loaded = (User) MY_LAZY_LOADER.loadObject();
+                User target = (User) obj;
+                target.name=loaded.getName();
+                initialized = true;
+            }
+        }
     }
 }

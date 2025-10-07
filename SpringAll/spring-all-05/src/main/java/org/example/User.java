@@ -1,11 +1,8 @@
-package org.example.test02;
+package org.example;
 
 public class User {
-    public String name;
 
-    public void hello() {
-        System.out.println("你好"+name);
-    }
+    private String name;
 
     public String getName() {
         return name;
@@ -13,5 +10,9 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void show() {
+        System.out.println("My name is " + name);
     }
 }
