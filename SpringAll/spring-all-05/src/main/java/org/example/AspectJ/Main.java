@@ -1,4 +1,4 @@
-package org.example;
+package org.example.AspectJ;
 
 import org.springframework.cglib.proxy.Callback;
 import org.springframework.cglib.proxy.Factory;

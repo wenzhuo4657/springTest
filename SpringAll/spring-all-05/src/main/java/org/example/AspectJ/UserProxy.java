@@ -1,4 +1,4 @@
-package org.example;
+package org.example.AspectJ;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect()
 public class UserProxy {
 
-    @Pointcut("execution(* org.example.User.*(..))")
+    @Pointcut("execution(* org.example.AspectJ.User.*(..))")
     public void pointCut() {
     }
 
